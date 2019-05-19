@@ -1,0 +1,9 @@
+table {
+  width: 100%;
+}
+
+img.picture {
+  width: 64px;
+  height: auto;
+  border-radius: 100%;
+}

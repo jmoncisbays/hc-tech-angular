@@ -1,0 +1,79 @@
+<div class="container">
+  <form class="mx-auto" novalidate [formGroup]="employeeForm" (ngSubmit)="save()" autocomplete="Off">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon class="mr-3">{{ isNewEmployee ? "person_add" : "edit" }}</mat-icon>
+          <span>{{ isNewEmployee ? "New" : "Edit" }} Employee</span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput placeholder="Full Name" formControlName="fullName"
+            [errorStateMatcher]="matcher" />
+          <mat-error *ngIf="fullNameControl.hasError('required')">
+            Full name is required
+          </mat-error>
+          <mat-error *ngIf="fullNameControl.hasError('maxlength')">
+            Full name should be maximum 150 characters long
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="number" placeholder="Age" formControlName="age"
+            [errorStateMatcher]="matcher" />
+          <mat-error *ngIf="ageControl.hasError('required')">
+            Age is required
+          </mat-error>
+          <mat-error *ngIf="ageControl.hasError('min') || ageControl.hasError('max')">
+            Age should be between 1 and 75
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="City" formControlName="cityCode"
+            [errorStateMatcher]="matcher" required />
+          <mat-error *ngIf="cityCodeControl.hasError('required')">
+            City is required
+          </mat-error>
+          <mat-error *ngIf="cityCodeControl.hasError('maxlength')">
+            City should be maximum 3 characters long
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email"
+            [errorStateMatcher]="matcher" />
+          <mat-error *ngIf="emailControl.hasError('email')">
+            Email is not valid
+          </mat-error>
+          <mat-error *ngIf="emailControl.hasError('maxlength')">
+            Email should be maximum 150 characters long
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Salary" formControlName="salary"
+            [errorStateMatcher]="matcher" />
+          <mat-error *ngIf="salaryControl.hasError('required')">
+            Salary is required
+          </mat-error>
+          <mat-error *ngIf="salaryControl.hasError('min') || salaryControl.hasError('max')">
+            Salary should be between 100 and 10,000
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <label>Picture:</label>
+          <div class="row">
+            <div class="col-4">
+              <img class="picture" src="{{ pictureBase64 }}" alt="(picture not available)">
+            </div>
+            <div class="col-8">
+              <input type="file" id="picture" (change)="pictureOnChange($event)" accept=".jpg">
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button type="submit" color="primary" class="mr-2" [disabled]="!employeeForm.valid">Save</button>
+        <button mat-raised-button [routerLink]="['/employees']">Close</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

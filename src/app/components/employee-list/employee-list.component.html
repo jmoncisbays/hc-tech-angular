@@ -1,0 +1,68 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon class="mr-3">people</mat-icon>
+        <span>Employees</span>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Id </th>
+          <td mat-cell *matCellDef="let employee"> {{employee.id}} <td>
+        </ng-container>
+
+        <ng-container matColumnDef="pictureBase64">
+          <th mat-header-cell *matHeaderCellDef> Picture </th>
+          <td mat-cell *matCellDef="let employee">
+            <img class="picture" src="{{ employee.pictureBase64 }}" alt="(picture not available)">
+          <td>
+        </ng-container>
+
+        <ng-container matColumnDef="fullName">
+          <th mat-header-cell *matHeaderCellDef> Full Name </th>
+          <td mat-cell *matCellDef="let employee"> {{employee.fullName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="age">
+          <th mat-header-cell *matHeaderCellDef> Age </th>
+          <td mat-cell *matCellDef="let employee"> {{employee.age}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cityCode">
+          <th mat-header-cell *matHeaderCellDef> City </th>
+          <td mat-cell *matCellDef="let employee"> {{employee.cityCode}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let employee"> {{employee.email}} <td>
+        </ng-container>
+
+        <ng-container matColumnDef="salary">
+          <th mat-header-cell *matHeaderCellDef> Salary </th>
+          <td mat-cell *matCellDef="let employee"> {{employee.salary | currency }} <td>
+        </ng-container>
+
+        <ng-container matColumnDef="updateDelete">
+          <th mat-header-cell *matHeaderCellDef> Update/Delete </th>
+          <td mat-cell *matCellDef="let employee">
+            <button mat-icon-button matTooltip="Update" [routerLink]="['/employee', employee.id]">
+              <mat-icon color="primary">edit</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Delete" (click)="openDialogDelete(employee.id)">
+              <mat-icon color="warn">delete</mat-icon>
+            </button>
+          <td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" [routerLink]="['/newemployee']">New</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
